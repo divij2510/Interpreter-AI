@@ -17,7 +17,6 @@ services:
     name: dodge-o2c-web
     runtime: static
     plan: free
-    region: oregon
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
