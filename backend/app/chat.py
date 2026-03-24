@@ -330,12 +330,7 @@ async def groq_chat(messages: list[dict[str, str]], temperature: float = 0.2) ->
                 json=payload,
             )
             r.raise_for_status()
-            try:
-                data = r.json()
-            except json.JSONDecodeError:
-                raise RuntimeError(
-                    "The AI service returned a non-JSON response. Try again later."
-                ) from None
+            data = r.json()
     except httpx.HTTPStatusError as e:
         code = e.response.status_code
         if code == 401:

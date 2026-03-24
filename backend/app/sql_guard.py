@@ -41,7 +41,7 @@ def run_guarded_select(conn: sqlite3.Connection, sql: str, allowed_tables: set[s
     if not ok:
         return [], msg
     try:
-        cur = conn.execute(msg)  # validated single SELECT statement
+        cur = conn.execute(msg)  # msg is possibly modified SQL with LIMIT
         rows = [dict(r) for r in cur.fetchall()]
         return rows, None
     except sqlite3.Error as e:
