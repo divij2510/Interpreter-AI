@@ -20,8 +20,6 @@ SAP O2C **JSONL** is ingested into **SQLite**, exposed as an in-memory **graph**
 
 On Windows, **port 8000** is often blocked (**WinError 10013**); **8080** is the default in this repo.
 
-**Deploy (free):** see **[DEPLOY_RENDER.md](./DEPLOY_RENDER.md)** — Render Blueprint (`render.yaml`) runs **API + static frontend**; commit **`sap-o2c-data/`** (not ignored) and set **`GROQ_API_KEY`** on the service (never commit **`.env`**).
-
 ---
 
 ## Architecture (why it’s built this way)
