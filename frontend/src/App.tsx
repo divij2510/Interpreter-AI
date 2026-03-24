@@ -144,7 +144,8 @@ export default function App() {
 
   const [messages, setMessages] = useState<ChatMsg[]>(loadChatHistory)
   const chatMessagesRef = useRef<HTMLDivElement>(null)
-  const chatScrollDidInitial = useRef(false)
+  /** Only auto-scroll chat when a new message is appended, not when toggling highlights etc. */
+  const prevChatLenRef = useRef(0)
   const [input, setInput] = useState('')
   const [chatBusy, setChatBusy] = useState(false)
   const [chatWidth, setChatWidth] = useState(() => {
@@ -214,8 +215,14 @@ export default function App() {
   useEffect(() => {
     const el = chatMessagesRef.current
     if (!el) return
-    const instant = !chatScrollDidInitial.current
-    chatScrollDidInitial.current = true
+    const len = messages.length
+    const prev = prevChatLenRef.current
+    if (len <= prev) {
+      prevChatLenRef.current = len
+      return
+    }
+    prevChatLenRef.current = len
+    const instant = prev === 0
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         el.scrollTo({
