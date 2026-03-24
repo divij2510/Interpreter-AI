@@ -28,7 +28,7 @@ def list_tables(conn: sqlite3.Connection) -> list[str]:
     return [r[0] for r in cur.fetchall()]
 
 
-def table_schema_summary(conn: sqlite3.Connection, max_cols: int = 12) -> str:
+def table_schema_summary(conn: sqlite3.Connection, max_cols: int = 48) -> str:
     lines: list[str] = []
     for t in list_tables(conn):
         info = conn.execute(f'PRAGMA table_info("{t}")').fetchall()
