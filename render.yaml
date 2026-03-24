@@ -1,0 +1,28 @@
+# Render Blueprint: API + static UI in one repo.
+# Dashboard → New → Blueprint → connect this repo → set GROQ_API_KEY when prompted.
+services:
+  - type: web
+    name: dodge-o2c-api
+    runtime: python
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+
+  - type: web
+    name: dodge-o2c-web
+    runtime: static
+    plan: free
+    region: oregon
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          name: dodge-o2c-api
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL

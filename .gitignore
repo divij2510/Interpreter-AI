@@ -1,0 +1,38 @@
+# --- Secrets (never commit) ---
+.env
+**/.env
+backend/.env
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# --- Python virtualenvs (never commit) ---
+# Repo root: explicit anchor. Other `.venv` dirs: same pattern matches any path.
+# If Git still tracks .venv: `git rm -r --cached .venv` then commit.
+/.venv/
+.venv/
+backend/.venv/
+# SQLite is generated on deploy from sap-o2c-data; keep DB out of git
+backend/data/*.db
+backend/data/*.db-*
+
+# --- Frontend (also covered by frontend/.gitignore; listed for repo-root clarity) ---
+frontend/node_modules/
+frontend/dist/
+
+# --- Python ---
+**/__pycache__/
+*.py[cod]
+*.pyo
+.Python
+
+# --- OS / IDE ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# --- Logs ---
+*.log
+
+# sap-o2c-data/ is intentionally NOT ignored — commit it for Render ingest on fresh instances.
