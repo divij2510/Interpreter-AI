@@ -57,9 +57,6 @@ Available tools and args:
 
 Rules:
 - Prefer a tool when it fits; use sql for other data questions (listing rows, specific filters, counts by columns).
-- SQL MUST use column names exactly as in the Schema block below—never invent names. Billing amounts:
-  table billing_document_headers → totalNetAmount (header total), billingDocument, billingDocumentIsCancelled, cancelledBillingDocument.
-  table billing_document_items → netAmount (line amount), billingDocument, billingDocumentItem. Do not use netAmount on headers.
 - Billing document numbers and delivery document numbers are numeric strings in this dataset.
 - If unsure between two tools, pick the more specific trace_* tool when the user gave a document id.
 - If the user asks to trace or follow the end-to-end flow for a billing document that must first be found
